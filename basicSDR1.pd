@@ -1,0 +1,111 @@
+#N canvas 0 22 1031 655 10;
+#X msg 44 19 start;
+#X obj 584 345 pvu~;
+#X obj 585 385 vu 15 120 empty empty -1 -8 0 10 -66577 -1 1 0;
+#X obj 624 312 *~ 1;
+#X obj 648 382 vsl 15 128 0 1 0 1 empty empty empty 0 -9 0 10 -261234
+-1 -1 10200 1;
+#X obj 44 -38 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 45 -17 t b b;
+#X obj 44 476 dac~;
+#X obj 624 346 throw~ audio-out;
+#X obj 43 449 catch~ audio-out;
+#X obj 129 271 *~ 1;
+#X obj 185 100 pvu~;
+#X obj 186 140 vu 15 120 empty empty -1 -8 0 10 -66577 -1 1 0;
+#X obj 146 134 vsl 15 128 0 127 0 0 empty empty empty 0 -9 0 10 -262130
+-1 -1 5500 1;
+#X obj 148 78 loadbang;
+#X obj 131 -79 tgl 30 0 empty empty empty 17 7 0 10 -4034 -1 -1 1 1
+;
+#X obj 45 -61 select 1;
+#X text 36 -100 start/stop audio loop;
+#X msg 146 102 1;
+#X obj 42 355 loadbang;
+#X msg 42 381 1;
+#X msg 41 406 \; pd dsp \$1;
+#X msg 76 381 0;
+#X text 97 240 preamp;
+#X obj 707 122 vsl 15 128 0 127 0 0 empty empty empty 0 -9 0 10 -203904
+-1 -1 4400 1;
+#X obj 246 274 *~ 1;
+#X obj 238 100 pvu~;
+#X obj 239 140 vu 15 120 empty empty -1 -8 0 10 -66577 -1 1 0;
+#X obj 44 74 readsf~ 2;
+#X obj 575 95 samplerate~;
+#X obj 574 46 loadbang;
+#X obj 574 70 bng 15 250 50 0 empty empty empty 17 7 0 10 -204786 -1
+-1;
+#X obj 575 134 * 0.5;
+#X obj 556 168 * -1;
+#X obj 474 199 maxlib/scale 0 127 -48000 48000;
+#X obj 476 -27 hsl 512 40 0 127 0 0 empty empty empty -2 -8 0 10 -204800
+-1 -1 26600 1;
+#X obj 588 267 maxlib/scale 0 127 1 6000;
+#X obj 538 301 lop~ 6000;
+#X text 488 20 frequency offset;
+#X text 731 -51 0;
+#X text 474 -51 -SR/2;
+#X text 958 -47 SR/2;
+#X text 740 216 filter width;
+#X obj 180 -87 / 1000;
+#X obj 180 -56 int;
+#X obj 180 -5 prepend set;
+#X msg 181 24 open ./10meter96.wav;
+#X msg 180 -30 open ./10meter\$1.wav;
+#X text 677 477 audio output level;
+#X text 333 -114 basicSDR1 a basic software defined radio - It uses
+IQ data files of 10 Meter amateur radio SSB in wav format - or you
+could patch in baseband input via the soundcard. note: this will work
+at 22.5 \, 44.1 \, or 96 Khz.;
+#X text 609 67 click here if sample rate changes;
+#X obj 453 266 complex-mod~;
+#X text 407 234 frequency shift within passband;
+#X connect 0 0 28 0;
+#X connect 1 0 2 0;
+#X connect 3 0 1 0;
+#X connect 3 0 8 0;
+#X connect 4 0 3 1;
+#X connect 5 0 6 0;
+#X connect 6 0 0 0;
+#X connect 6 1 46 0;
+#X connect 9 0 7 0;
+#X connect 9 0 7 1;
+#X connect 10 0 11 0;
+#X connect 10 0 51 0;
+#X connect 11 0 12 0;
+#X connect 13 0 10 1;
+#X connect 13 0 25 1;
+#X connect 14 0 18 0;
+#X connect 15 0 16 0;
+#X connect 16 0 5 0;
+#X connect 16 1 28 0;
+#X connect 18 0 13 0;
+#X connect 19 0 20 0;
+#X connect 20 0 21 0;
+#X connect 22 0 21 0;
+#X connect 24 0 36 0;
+#X connect 25 0 26 0;
+#X connect 25 0 51 1;
+#X connect 26 0 27 0;
+#X connect 28 0 10 0;
+#X connect 28 1 25 0;
+#X connect 28 2 6 0;
+#X connect 29 0 32 0;
+#X connect 29 0 43 0;
+#X connect 30 0 31 0;
+#X connect 31 0 29 0;
+#X connect 32 0 33 0;
+#X connect 32 0 34 4;
+#X connect 33 0 34 3;
+#X connect 34 0 51 2;
+#X connect 35 0 34 0;
+#X connect 36 0 37 1;
+#X connect 37 0 3 0;
+#X connect 43 0 44 0;
+#X connect 44 0 47 0;
+#X connect 45 0 46 0;
+#X connect 46 0 28 0;
+#X connect 47 0 45 0;
+#X connect 51 0 37 0;
